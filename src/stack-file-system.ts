@@ -15,7 +15,7 @@ export default class StackFileSystem implements FileSystem {
    */
   private static readonly maxFiles = 100;
 
-  private readonly logger = createLogger({ name: 'StackFileSystem' });
+  private static readonly logger = createLogger({ name: 'StackFileSystem' });
 
   /**
    * Connection of FileSystem.
@@ -74,6 +74,7 @@ export default class StackFileSystem implements FileSystem {
    */
   public static async create(connection: FtpConnection, username: string, password: string):
   Promise<StackFileSystem> {
+    this.logger.info({ action: 'create', username });
     const at = username.indexOf('@');
     const share = username.substr(0, at);
     const domain = username.substr(at + 1);
@@ -117,7 +118,7 @@ export default class StackFileSystem implements FileSystem {
    */
   async get(fileName: string): Promise<any> {
     const clientPath = path.posix.join(this.cwd, fileName);
-    this.logger.info({ client: this.connection.id, action: 'get', path: clientPath });
+    StackFileSystem.logger.info({ client: this.connection.id, action: 'get', path: clientPath });
     // throw new Error('Method not implemented.');
     return {
       isDirectory: () => true,
@@ -129,7 +130,7 @@ export default class StackFileSystem implements FileSystem {
    */
   async list(fileName?: string): Promise<any> {
     const clientPath = path.posix.join(this.cwd, fileName);
-    this.logger.info({ client: this.connection.id, action: 'list', path: clientPath });
+    StackFileSystem.logger.info({ client: this.connection.id, action: 'list', path: clientPath });
 
     let i = 0;
     let nodes: StackStats[] = [];
@@ -166,7 +167,7 @@ export default class StackFileSystem implements FileSystem {
    */
   async chdir(fileName?: string): Promise<string> {
     this.workingDir = path.posix.join(this.root, fileName);
-    this.logger.info({ client: this.connection.id, action: 'cwd', path: this.cwd });
+    StackFileSystem.logger.info({ client: this.connection.id, action: 'cwd', path: this.cwd });
     return this.cwd;
   }
 
@@ -175,7 +176,7 @@ export default class StackFileSystem implements FileSystem {
    */
   async write(fileName: string): Promise<any> {
     const clientPath = path.posix.join(this.cwd, fileName);
-    this.logger.info({ client: this.connection.id, action: 'write', path: clientPath });
+    StackFileSystem.logger.info({ client: this.connection.id, action: 'write', path: clientPath });
     const stream = new PassThrough();
     stream.pipe(request({
       baseUrl: this.baseUrl,
@@ -194,7 +195,7 @@ export default class StackFileSystem implements FileSystem {
    */
   async read(fileName: string): Promise<any> {
     const clientPath = path.posix.join(this.cwd, fileName);
-    this.logger.info({ client: this.connection.id, action: 'read', path: clientPath });
+    StackFileSystem.logger.info({ client: this.connection.id, action: 'read', path: clientPath });
     return request({
       baseUrl: this.baseUrl,
       url: 'download',
@@ -212,7 +213,7 @@ export default class StackFileSystem implements FileSystem {
    */
   async delete(fileName: string): Promise<any> {
     const clientPath = path.posix.join(this.cwd, fileName);
-    this.logger.info({ client: this.connection.id, action: 'delete', path: clientPath });
+    StackFileSystem.logger.info({ client: this.connection.id, action: 'delete', path: clientPath });
     throw new Error('Method not implemented.');
   }
 
@@ -221,7 +222,7 @@ export default class StackFileSystem implements FileSystem {
    */
   async mkdir(fileName: string): Promise<any> {
     const clientPath = path.posix.join(this.cwd, fileName);
-    this.logger.info({ client: this.connection.id, action: 'mkdir', path: clientPath });
+    StackFileSystem.logger.info({ client: this.connection.id, action: 'mkdir', path: clientPath });
     throw new Error('Method not implemented.');
   }
 
@@ -231,7 +232,7 @@ export default class StackFileSystem implements FileSystem {
   async rename(from: string, to: string): Promise<any> {
     const fromPath = path.posix.join(this.cwd, from);
     const toPath = path.posix.join(this.cwd, to);
-    this.logger.info({
+    StackFileSystem.logger.info({
       client: this.connection.id, action: 'rename', from: fromPath, to: toPath,
     });
     throw new Error('Method not implemented.');
@@ -242,7 +243,7 @@ export default class StackFileSystem implements FileSystem {
    */
   async chmod(fileName: string, mode: string): Promise<any> {
     const clientPath = path.posix.join(this.cwd, fileName);
-    this.logger.info({
+    StackFileSystem.logger.info({
       client: this.connection.id, action: 'chmod', path: clientPath, mode,
     });
     throw new Error('Method not implemented.');
@@ -252,7 +253,7 @@ export default class StackFileSystem implements FileSystem {
    * @inheritdoc
    */
   getUniqueName(): string {
-    this.logger.info({ client: this.connection.id, action: 'unique-name' });
+    StackFileSystem.logger.info({ client: this.connection.id, action: 'unique-name' });
     throw new Error('Method not implemented.');
   }
 }
