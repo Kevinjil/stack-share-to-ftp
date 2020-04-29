@@ -166,7 +166,11 @@ export default class StackFileSystem implements FileSystem {
    * @inheritdoc
    */
   async chdir(fileName?: string): Promise<string> {
-    this.workingDir = path.posix.join(this.root, fileName);
+    if (path.posix.isAbsolute(fileName)) {
+      this.workingDir = path.posix.join(this.root, fileName);
+    } else {
+      this.workingDir = path.posix.join(this.cwd, fileName);
+    }
     StackFileSystem.logger.info({ client: this.connection.id, action: 'cwd', path: this.cwd });
     return this.cwd;
   }
