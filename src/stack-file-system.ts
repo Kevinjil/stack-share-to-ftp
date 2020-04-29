@@ -157,6 +157,8 @@ export default class StackFileSystem implements FileSystem {
         fetched = res.body.nodes.length;
         nodes = nodes.concat(res.body.nodes.map((node: StackApiStats) => new StackStats(node)));
         i += 1;
+      } else {
+        fetched = 0;
       }
     } while (fetched === StackFileSystem.maxFiles);
     return nodes;
