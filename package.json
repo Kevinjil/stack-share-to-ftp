@@ -1,0 +1,45 @@
+{
+  "name": "stack-share-to-ftp",
+  "version": "0.1.0",
+  "description": "Translate FTP requests to STACK shared folder API.",
+  "main": "out/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node out/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "ts-node-dev src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kevinjil/stack-share-to-ftp.git"
+  },
+  "keywords": [
+    "STACK",
+    "FTP"
+  ],
+  "author": "Kevin Jilissen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kevinjil/stack-share-to-ftp/issues"
+  },
+  "pkg": {
+    "scripts": "out/**/*.js"
+  },
+  "bin": {
+    "stack-share-to-ftp": "./out/index.js"
+  },
+  "homepage": "https://github.com/kevinjil/stack-share-to-ftp#readme",
+  "devDependencies": {
+    "@types/request": "^2.48.4",
+    "@typescript-eslint/eslint-plugin": "^2.30.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-typescript": "^7.2.1",
+    "eslint-plugin-import": "^2.20.2",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "ftp-srv": "^4.3.1",
+    "request": "^2.88.2"
+  }
+}
