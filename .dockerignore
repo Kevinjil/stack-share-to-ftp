@@ -1,0 +1,25 @@
+#IDEs
+.vscode
+.idea
+
+#Linters and coverages
+.nyc_output/
+reports
+
+#Nodejs
+node_modules
+out
+
+#Local data
+*.sqlite
+*.vbs
+
+#Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+#Git
+.git
+.gitattributes
+.gitignore
