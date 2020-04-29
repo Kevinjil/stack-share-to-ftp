@@ -11,26 +11,13 @@ const port = Number(process.argv[2]) || 21;
  */
 const bindaddr = process.argv[3] || '127.0.0.1';
 
-// Create server with only supported operations by STACK API.
+// Create server.
 const ftpServer = new FtpSrv({
   url: `ftp://${bindaddr}:${port}`,
   pasv_url: bindaddr,
   pasv_min: 10000,
-  pasv_max: 11000,
+  pasv_max: 10100,
   timeout: 300000,
-  whitelist: [
-    'CDUP',
-    'CWD',
-    'LIST',
-    'PASS',
-    'PASV',
-    'PORT',
-    'PWD',
-    'RETR',
-    'STOR',
-    'TYPE',
-    'USER',
-  ],
 });
 
 /**
