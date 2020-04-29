@@ -30,6 +30,7 @@
   },
   "homepage": "https://github.com/kevinjil/stack-share-to-ftp#readme",
   "devDependencies": {
+    "@types/bunyan": "^1.8.6",
     "@types/request": "^2.48.4",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "eslint": "^6.8.0",
@@ -39,6 +40,7 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
+    "bunyan": "^1.8.12",
     "ftp-srv": "^4.3.1",
     "request": "^2.88.2"
   }
