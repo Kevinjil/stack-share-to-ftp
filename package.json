@@ -18,7 +18,7 @@
     "FTP"
   ],
   "author": "Kevin Jilissen",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/kevinjil/stack-share-to-ftp/issues"
   },
